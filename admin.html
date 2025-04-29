@@ -33,7 +33,7 @@
                 <td>{{ inscrit['creneau'] }}</td>
                 <td>
                     <a href="/edit/{{ inscrit['id'] }}">Modifier</a> |
-                    <a href="/delete/{{ inscrit['id'] }}" onclick="return confirm('Supprimer cette inscription ?');">Supprimer</a>
+                    <a href="/admin/delete/{{ inscrit['id'] }}" onclick="return confirm('Supprimer cette inscription ?');">Supprimer</a>
                 </td>
             </tr>
             {% endfor %}
