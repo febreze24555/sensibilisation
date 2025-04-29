@@ -4,7 +4,7 @@ import os
 import hashlib
 
 app = Flask(__name__, template_folder='.')
-app.secret_key = 'phishing_secret_key'
+app.secret_key = os.environ.get('SECRET_KEY', 'phishing_secret_key')
 
 @app.route('/style.css')
 def serve_css():
