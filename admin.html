@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - Inscriptions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Administration des inscriptions</h1>
+    <a href="/logout" style="float:right;">Déconnexion</a>
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Service</th>
+                <th>Mode</th>
+                <th>Créneau</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inscrit in inscriptions %}
+            <tr>
+                <td>{{ inscrit['nom'] }}</td>
+                <td>{{ inscrit['prenom'] }}</td>
+                <td>{{ inscrit['email'] }}</td>
+                <td>{{ inscrit['service'] }}</td>
+                <td>{{ inscrit['mode'] }}</td>
+                <td>{{ inscrit['creneau'] }}</td>
+                <td>
+                    <a href="/edit/{{ inscrit['id'] }}">Modifier</a> |
+                    <a href="/delete/{{ inscrit['id'] }}" onclick="return confirm('Supprimer cette inscription ?');">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

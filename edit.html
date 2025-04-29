@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier Inscription</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Modifier l'inscription</h1>
+    <a href="/admin">Retour à l'administration</a>
+    <form method="post">
+        <div class="input-group">
+            <input type="text" id="nom" name="nom" value="{{ inscrit['nom'] }}" required placeholder=" ">
+            <label for="nom">Nom :</label>
+        </div>
+        <div class="input-group">
+            <input type="text" id="prenom" name="prenom" value="{{ inscrit['prenom'] }}" required placeholder=" ">
+            <label for="prenom">Prénom :</label>
+        </div>
+        <div class="input-group">
+            <input type="email" id="email" name="email" value="{{ inscrit['email'] }}" required placeholder=" ">
+            <label for="email">Adresse e-mail</label>
+        </div>
+        <div class="input-group">
+            <input type="text" id="service" name="service" value="{{ inscrit['service'] }}" required placeholder=" ">
+            <label for="service">Service</label>
+        </div>
+        <div class="input-group">
+            <select id="creneau" name="creneau" required>
+                {% for creneau in creneaux %}
+                    <option value="{{ creneau.date }}" {% if inscrit['creneau'] == creneau.date %}selected{% endif %}>
+                        {{ creneau.date }} ({{ creneau.heure }})
+                    </option>
+                {% endfor %}
+            </select>
+            <label for="creneau">Créneau</label>
+        </div>
+        <div class="input-group">
+            <select id="mode" name="mode" required>
+                <option value="Présentiel" {% if inscrit['mode'] == 'Présentiel' %}selected{% endif %}>Présentiel</option>
+                <option value="Distanciel" {% if inscrit['mode'] == 'Distanciel' %}selected{% endif %}>Distanciel</option>
+            </select>
+            <label for="mode">Mode</label>
+        </div>
+        <button type="submit">Enregistrer</button>
+    </form>
+</div>
+</body>
+</html>

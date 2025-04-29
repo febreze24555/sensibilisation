@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Sensibilisation Phishing</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="header">
+    <div class="header-content">
+        <img src="https://th.bing.com/th/id/R.e3fb7ee0bebe4883a1ff6457c9d9e2e4?rik=7kX8Dkdhw%2fF9JQ&pid=ImgRaw&r=0" alt="Logo Gruel Fayer">
+        <div class="header-text">
+            <h1>GRUEL FAYER</h1>
+            <p>Sensibilisation au Phishing · Inscription</p>
+        </div>
+        <a href="/admin"><button type="button">Administrateur</button></a>
+    </div>
+</div>
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="post">
+        <div class="input-group">
+            <input type="text" id="nom" name="nom" required placeholder=" " autocomplete="off">
+            <label for="nom">Nom :</label>
+        </div>
+        <div class="input-group">
+            <input type="text" id="prenom" name="prenom" required placeholder=" " autocomplete="off">
+            <label for="prenom">Prénom :</label>
+        </div>
+        <div class="input-group">
+            <input type="email" id="email" name="email" required placeholder=" " autocomplete="off">
+            <label for="email">Adresse e-mail</label>
+        </div>
+        <div class="input-group">
+            <input type="text" id="service" name="service" placeholder=" " required autocomplete="off">
+            <label for="service">Service (ex : Logistique, Commercial...)</label>
+        </div>
+        <div class="input-group">
+            <select id="mode" name="mode" required>
+                <option value="" disabled selected hidden></option>
+                <option value="Présentiel">Présentiel</option>
+                <option value="Distanciel">Distanciel</option>
+            </select>
+            <label for="mode">Mode</label>
+        </div>
+        <div class="input-group">
+            <select id="creneau" name="creneau" required>
+                <option value="" disabled selected hidden></option>
+                {% for creneau in creneaux %}
+                    <option value="{{ creneau.date }}" {% if inscrits[creneau.date] >= 10 %}disabled{% endif %}>
+                        {{ creneau.date }} ({{ creneau.heure }}) {% if inscrits[creneau.date] >= 10 %}- COMPLET{% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+            <label for="creneau">Créneau</label>
+        </div>
+        <button type="submit">S'inscrire</button>
+    </form>
+    <h2>Places restantes par créneau</h2>
+    <div class="creneaux-cards">
+        {% for creneau in creneaux %}
+            <div class="creneau-card {% if inscrits[creneau.date] >= 10 %}complet{% endif %}">
+                <div class="date">{{ creneau.date }}</div>
+                <div class="heure">{{ creneau.heure }}</div>
+                {% if inscrits[creneau.date] >= 10 %}
+                    <div class="places complet">Complet</div>
+                {% else %}
+                    <div class="places">{{ 10 - inscrits[creneau.date] }} place(s) restante(s)</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<script src="background.js"></script>
+</body>
+</html>

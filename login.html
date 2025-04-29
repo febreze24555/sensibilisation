@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Administrateur</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .login-card {
+            background: rgba(255,255,255,0.78);
+            border-radius: 28px;
+            box-shadow: 0 8px 32px rgba(67,160,71,0.13), 0 1.5px 8px rgba(67,160,71,0.08);
+            max-width: 400px;
+            margin: 60px auto 0 auto;
+            padding: 38px 36px 30px 36px;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(8px) saturate(1.2);
+            border: 1.5px solid rgba(67,160,71,0.13);
+        }
+        .login-card h2 {
+            color: #205c2b;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .login-card .input-group {
+            margin-bottom: 22px;
+        }
+        .login-card label {
+            color: #205c2b;
+            font-size: 1em;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .login-card input[type="text"], .login-card input[type="password"] {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1.5px solid #b8e0c7;
+            border-radius: 11px;
+            background: rgba(255,255,255,0.9);
+            font-size: 1.09em;
+            margin-top: 0;
+            margin-bottom: 0;
+            transition: border 0.17s, box-shadow 0.17s;
+            outline: none;
+            color: #205c2b;
+        }
+        .login-card input[type="text"]:focus, .login-card input[type="password"]:focus {
+            border: 2px solid #43a047;
+            box-shadow: 0 2px 12px rgba(67,160,71,0.10);
+            background: #fff;
+        }
+        .login-card button {
+            width: 100%;
+            padding: 13px 0;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #43a047 0%, #66bb6a 100%);
+            color: #fff;
+            border: none;
+            font-size: 1.12em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-top: 12px;
+            box-shadow: 0 4px 16px rgba(67,160,71,0.13);
+            cursor: pointer;
+            transition: background 0.18s, transform 0.13s;
+        }
+        .login-card button:hover {
+            background: linear-gradient(90deg, #388e3c 0%, #43a047 100%);
+            transform: translateY(-2px) scale(1.025);
+            box-shadow: 0 8px 32px rgba(67,160,71,0.18);
+        }
+        .login-card .error {
+            color: #b71c1c;
+            background: #ffcdd2;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2>Connexion Administrateur</h2>
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+        <form method="post">
+            <div class="input-group">
+                <label for="login">Adresse e-mail</label>
+                <input type="text" id="login" name="login" required autocomplete="username">
+            </div>
+            <div class="input-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
+            </div>
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+</body>
+</html>
